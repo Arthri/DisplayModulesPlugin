@@ -51,7 +51,11 @@ namespace DisplayModulesPlugin
             PaginationTools.SendPage(
                 e.Player,
                 page,
-                lines);
+                lines,
+                new PaginationTools.Settings
+                {
+                    FooterFormat = "Type /dmods {0} for more."
+                });
         }
     }
 }
