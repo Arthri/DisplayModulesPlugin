@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using Terraria;
 using TerrariaApi.Server;
+using TShockAPI;
 
 namespace DisplayModulesPlugin
 {
@@ -22,7 +24,32 @@ namespace DisplayModulesPlugin
 
         public override void Initialize()
         {
+            Commands.ChatCommands.Add(new Command("displaymodules.displaymodules", HandleDisplayModules, "displaymodules", "dmods", "showmods"));
+        }
 
+        private void HandleDisplayModules(CommandArgs e)
+        {
+            int page = 1;
+            if (e.Parameters.Count > 0)
+            {
+                if (!int.TryParse(e.Parameters[1], out page))
+                {
+                    e.Player.SendErrorMessage("Invalid page");
+                    return;
+                }
+            }
+            else
+            {
+                e.Player.SendErrorMessage("Too many arguments specified");
+            }
+
+            var moduleTerms = AppDomain.CurrentDomain.GetAssemblies()
+                .Select(a => $"{a.GetCustomAttribute<AssemblyTitleAttribute>().Title}({a.GetName().Version})");
+            var lines = PaginationTools.BuildLinesFromTerms(moduleTerms);
+            PaginationTools.SendPage(
+                e.Player,
+                page,
+                lines);
         }
     }
 }
