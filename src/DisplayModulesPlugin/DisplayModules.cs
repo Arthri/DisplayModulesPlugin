@@ -32,7 +32,7 @@ namespace DisplayModulesPlugin
             int page = 1;
             if (e.Parameters.Count > 0)
             {
-                if (!int.TryParse(e.Parameters[1], out page))
+                if (!int.TryParse(e.Parameters[0], out page))
                 {
                     e.Player.SendErrorMessage("Invalid page");
                     return;
