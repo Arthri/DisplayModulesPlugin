@@ -38,9 +38,10 @@ namespace DisplayModulesPlugin
                     return;
                 }
             }
-            else
+            else if (e.Parameters.Count > 1)
             {
                 e.Player.SendErrorMessage("Too many arguments specified");
+                return;
             }
 
             var moduleTerms = AppDomain.CurrentDomain.GetAssemblies()
