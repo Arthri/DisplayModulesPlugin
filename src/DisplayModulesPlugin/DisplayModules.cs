@@ -45,6 +45,7 @@ namespace DisplayModulesPlugin
             }
 
             var moduleTerms = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => !a.IsDynamic)
                 .Select(a => $"{a.GetCustomAttribute<AssemblyTitleAttribute>().Title}({a.GetName().Version})");
             var lines = PaginationTools.BuildLinesFromTerms(moduleTerms);
             PaginationTools.SendPage(
