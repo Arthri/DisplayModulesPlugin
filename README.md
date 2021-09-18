@@ -35,4 +35,4 @@ Shows the current AppDomain's loaded modules. It uses `AppDomain.CurrentDomain.G
 - Run `dotnet build` to build. Alternatively use Ctrl + F5 in Visual Studio
 
 # License
-[MIT-0](https://github.com/Arthri/DisplayModulesPlugin/blob/LICENSE)
+[MIT-0](https://github.com/Arthri/DisplayModulesPlugin/blob/master/LICENSE)
